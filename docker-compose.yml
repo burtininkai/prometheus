@@ -1,0 +1,44 @@
+version: "3.7"
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    networks:
+      - prometheus
+    deploy:
+      restart_policy:
+        condition: always
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    networks:
+      - prometheus
+    deploy:
+      restart_policy:
+        condition: always
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    networks:
+      - prometheus
+    deploy:
+      restart_policy:
+        condition: always
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:latest
+    networks:
+      - prometheus
+    deploy:
+      restart_policy:
+        condition: always
+
+  nginx:
+    image: nginx:latest
+    networks:
+      - prometheus
+    deploy:
+      restart_policy:
+        condition: always
+
+networks:
+  prometheus:
